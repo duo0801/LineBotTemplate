@@ -50,7 +50,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(string(event.Source.Type))).Do(); err != nil {
 					log.Print(err)
 				}
-		if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(string(event.Source.Groupid))).Do(); err != nil {
+		if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(string(event.Source.GroupID))).Do(); err != nil {
 					log.Print(err)
 				}
 		if event.Type == linebot.EventTypeMessage {
