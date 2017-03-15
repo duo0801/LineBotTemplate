@@ -78,7 +78,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				log.Print(err)
 			}
 		}
-		
+
 		if event.Type == linebot.EventTypeLeave {
 			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypeLeave")).Do(); err != nil {
 				log.Print(err)
@@ -91,6 +91,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		if event.Type == linebot.EventTypeBeacon {
 			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypeBeacon")).Do(); err != nil {
+				log.Print(err)
+			}
+		}
+		if event.Type == linebot.EventSourceTypeGroup {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventSourceTypeGroup")).Do(); err != nil {
 				log.Print(err)
 			}
 		}
