@@ -59,6 +59,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
 					log.Print(err)
 				}
+			case *linebot.JoinEvent:
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("歡迎加入欣峰")).Do(); err != nil {
+					log.Print(err)
+				}
 			}
 		}
 	}
