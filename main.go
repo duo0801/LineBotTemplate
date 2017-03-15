@@ -49,10 +49,50 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.ID+"1xx:"+message.Text+" OK!")).Do(); err != nil {
+				var msg = message.ID+":"+message.Text+" (replace)"
+				log.Println(message.Text)
+				inText := strings.ToLower(message.Text)
+				if strings.Contains(inText, "制度") {
+					msg = "你問我制度？"
+				} 
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
 					log.Print(err)
 				}
 			}
 		}
 	}
+
+
+	for _, event := range events {
+		if event.Type == linebot.EventTypeMessage {
+			switch message := event.Message.(type) {
+			case *linebot.TextMessage:
+				var pet *Pet
+				log.Println(message.Text)
+				inText := strings.ToLower(message.Text)
+				if strings.Contains(inText, "狗") || strings.Contains(inText, "dog") {
+					pet = PetDB.GetNextDog()
+				} else if strings.Contains(inText, "貓") || strings.Contains(inText, "cat") {
+					pet = PetDB.GetNextCat()
+				}
+
+				if pet == nil {
+					pet = PetDB.GetNextPet()
+				}
+
+				out := fmt.Sprintf("您好，目前的動物：名為%s, 所在地為:%s, 敘述: %s 電話為:%s 圖片網址在: %s", pet.Name, pet.Resettlement, pet.Note, pet.Phone, pet.ImageName)
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(out)).Do(); err != nil {
+					log.Print(err)
+				}
+
+				log.Println("Img:", pet.ImageName)
+
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(pet.ImageName, pet.ImageName)).Do(); err != nil {
+					log.Print(err)
+				}
+			}
+		}
+	}
+
+
 }
