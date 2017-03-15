@@ -66,6 +66,34 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				log.Print(err)
 			}
 		}
+
+		if event.Type == linebot.EventTypeFollow {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypeFollow")).Do(); err != nil {
+				log.Print(err)
+			}
+		}
+
+		if event.Type == linebot.EventTypeUnfollow {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypeUnfollow")).Do(); err != nil {
+				log.Print(err)
+			}
+		}
+		
+		if event.Type == linebot.EventTypeLeave {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypeLeave")).Do(); err != nil {
+				log.Print(err)
+			}
+		}
+		if event.Type == linebot.EventTypePostback {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypePostback")).Do(); err != nil {
+				log.Print(err)
+			}
+		}
+		if event.Type == linebot.EventTypeBeacon {
+			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypeBeacon")).Do(); err != nil {
+				log.Print(err)
+			}
+		}
 	}
 
 }
