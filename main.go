@@ -51,10 +51,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 				var msg = message.ID+":"+message.Text+" (replaces)"
 				log.Println(message.Text)
-				inText := strings.ToLower(message.Text)
-				// if strings.Contains(inText, "制度") {
-				// 	msg := "你問我制度？"
-				// } 
+				if strings.Contains(message.Text, "制度") {
+					msg = "你問我制度？"
+				} 
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
 					log.Print(err)
 				}
