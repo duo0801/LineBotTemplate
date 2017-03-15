@@ -61,7 +61,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		}
-		else if event.Type == linebot.EventTypeJoin {
+		if event.Type == linebot.EventTypeJoin {
 			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("歡迎加入欣峰")).Do(); err != nil {
 				log.Print(err)
 			}
