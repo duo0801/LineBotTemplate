@@ -47,6 +47,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, event := range events {
+		if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event.Type)).Do(); err != nil {
+					log.Print(err)
+				}
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
@@ -91,11 +94,6 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		if event.Type == linebot.EventTypeBeacon {
 			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventTypeBeacon")).Do(); err != nil {
-				log.Print(err)
-			}
-		}
-		if event.Type == linebot.EventSourceTypeGroup {
-			if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("EventSourceTypeGroup")).Do(); err != nil {
 				log.Print(err)
 			}
 		}
