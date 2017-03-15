@@ -47,7 +47,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, event := range events {
-		if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event.Type)).Do(); err != nil {
+		if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(event)).Do(); err != nil {
 					log.Print(err)
 				}
 		if event.Type == linebot.EventTypeMessage {
