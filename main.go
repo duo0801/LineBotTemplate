@@ -54,7 +54,15 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				// message.ID+":"+message.Text+" (replaces)"
-				var msg = event.Source.UserID + event.Source.GroupID + event.Source.RoomID + ":"
+				var msg = 	"ID:" +	message.ID + "\r\n"
+					msg +=	"Text:" +	message.Text + "\r\n"
+					msg +=	"Duration:" +	message.Duration  + "\r\n"
+					msg +=	"Title:" +	message.Title + "\r\n"
+					msg +=	"Address:" +	message.Address + "\r\n"
+					msg +=	"Latitude:" +	message.Latitude + "\r\n"
+					msg +=	"Longitud:" +	essage.Longitud + "\r\n"
+					msg +=	"PackageID:" +	message.PackageID + "\r\n"
+					msg +=	"StickerID:" +	message.StickerID + "\r\n"
 
 				log.Println(message.Text)
 				if strings.Contains(message.Text, "常見問答") {
