@@ -56,13 +56,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				// message.ID+":"+message.Text+" (replaces)"
 				var msg = 	"ID:" +	string(message.ID) + "\r\n"
 					msg +=	"Text:" +	string(message.Text) + "\r\n"
-					msg +=	"Duration:" +	string(message.Duration)  + "\r\n"
-					msg +=	"Title:" +	string(message.Title) + "\r\n"
-					msg +=	"Address:" +	string(message.Address) + "\r\n"
-					msg +=	"Latitude:" +	string(message.Latitude) + "\r\n"
-					msg +=	"Longitud:" +	string(essage.Longitud) + "\r\n"
-					msg +=	"PackageID:" +	string(message.PackageID) + "\r\n"
-					msg +=	"StickerID:" +	string(message.StickerID) + "\r\n"
+					msg +=	"Hwid:" +	string(event.Beacon.Hwid)  + "\r\n"
 
 				log.Println(message.Text)
 				if strings.Contains(message.Text, "常見問答") {
